@@ -1,0 +1,15 @@
+chart,code,dice
+dungeon entrance,A1,d12
+dungeon type,A2,2d6
+entrance chamber,A3,d20
+corridors,B1,d6*10+d6
+stocking corridors,B2,1d6
+corridor feature,B3,d20
+trap trigger,B4-01,d8
+trap effect,B4-02,d12
+door types,B5,d10
+chambers,C1,d6*10+d6
+stocking chamber,C2,d6
+chamber features,C3,d20
+chamber special,C4,d20
+re-stocking chamber,C5,d6
