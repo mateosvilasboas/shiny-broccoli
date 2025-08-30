@@ -96,7 +96,7 @@
                     <div class="card-body">
                         <div class="position-relative">
                             <div class="response-text p-3 bg-light rounded border">
-                                {{ suggested_response|replace('\n', '<br>')|safe }}
+                                {{ suggested_response|markdown|safe }}
                             </div>
                             <button class="btn btn-outline-primary btn-sm mt-3" onclick="copyResponse()">
                                 <i class="fas fa-copy me-2"></i>Copiar Resposta
@@ -113,8 +113,8 @@
                         </h5>
                     </div>
                     <div class="card-body">
-                        <div class="bg-light p-3 rounded border">
-                            <pre class="mb-0 text-wrap">{{ original_text }}</pre>
+                        <div class="bg-light p-3 rounded border email-content">
+                            <div class="email-text">{{ original_text|nl2br|safe }}</div>
                         </div>
                     </div>
                 </div>

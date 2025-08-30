@@ -8,6 +8,7 @@ class Settings(BaseSettings):
 
     HUGGING_FACE_TOKEN: str
     DATA_FOLDER: str
+    GEMINI_API_KEY: str
 
 
 settings = Settings()

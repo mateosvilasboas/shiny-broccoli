@@ -7,17 +7,7 @@ class Input(BaseModel):
 
 
 class Output(BaseModel):
-    text: str
-    label: str
-    score: float
-
-    model_config = ConfigDict(
-        from_attributes=True
-    )
-
-
-class OutputList(BaseModel):
-    classified_data_list: List[Output]
+    explanation: str
 
     model_config = ConfigDict(
         from_attributes=True

@@ -1,0 +1,123 @@
+# ====================
+# .dockerignore para projeto FastAPI + ML
+# ====================
+
+# === MODELOS (MUITO PESADOS) ===
+models/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.pkl
+*.joblib
+
+# === GIT ===
+.git/
+.gitignore
+.github/
+
+# === PYTHON ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# === AMBIENTES VIRTUAIS ===
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+
+# === JUPYTER/NOTEBOOKS ===
+.ipynb_checkpoints/
+*.ipynb
+
+# === DATASETS/DATA ===
+data/
+datasets/
+*.csv
+*.json
+*.parquet
+*.feather
+*.hdf5
+
+# === LOGS ===
+logs/
+*.log
+*.out
+*.err
+
+# === TEMPORÁRIOS ===
+.tmp/
+tmp/
+temp/
+.cache/
+*.tmp
+*.temp
+
+# === IDE/EDITOR ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# === DOCUMENTAÇÃO ===
+docs/
+*.md
+!README.md
+
+# === TESTES ===
+tests/
+test_*/
+*_test.py
+conftest.py
+
+# === BUILD/DIST ===
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# === DOCKER ===
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# === ALEMBIC (se não usar migrations no container) ===
+alembic/
+alembic.ini
+
+# === EXEMPLOS/SAMPLES ===
+exemplos/
+examples/
+samples/
+
+# === BACKUP/RECOVERY ===
+backup/
+*.bak
+*.backup
+
+# === ESPECÍFICOS DO PROJETO ===
+# Uncomment se necessário:
+# trainment/  # Se treinar fora do container
+# static/     # Se servir via CDN
