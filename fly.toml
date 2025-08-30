@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for shiny-broccoli on 2025-08-30T20:59:39Z
+# fly.toml app configuration file generated for shiny-broccoli on 2025-08-30T22:58:04Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = 'shiny-broccoli'
-primary_region = 'gig'
+primary_region = 'gru'
 
 [build]
 
