@@ -2,14 +2,20 @@ FROM python:3.12.3-slim
 ENV POETRY_VIRTUALENVS_CREATE=false
 
 WORKDIR /app
-COPY . .
 
+# Instalar Poetry
 RUN pip install poetry
 
+# Copiar arquivos de dependências primeiro (para cache)
+COPY pyproject.toml poetry.lock ./
+
+# Instalar dependências
 RUN poetry config installer.max-workers 10
 RUN poetry install --no-interaction --no-ansi
 
+# Copiar código da aplicação (models/ está no .dockerignore)
+COPY . .
+
 EXPOSE 8000
 
-
-# by https://fastapidozero.dunossauro.com/11/?h=dockeri#__tabbed_2_2
+CMD ["uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "8000"]

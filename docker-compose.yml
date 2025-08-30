@@ -1,9 +1,9 @@
 services:
   app:
     build: .
-    entrypoint: ./entrypoint.sh
-    command: uvicorn app.app:app --host 0.0.0.0 --reload
     ports:
-      - 8000:8000
+      - "8000:8000"
     volumes:
-      - .:/app
+      - ./models:/app/models  # Volume para modelos persistentes
+    env_file:
+      - .env

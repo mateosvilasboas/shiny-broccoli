@@ -1,53 +1,31 @@
 # ====================
-# .dockerignore para projeto FastAPI + ML
+# .dockerignore - SIMPLIFICADO
 # ====================
 
-# === MODELOS (MUITO PESADOS) ===
+# === MODELOS (PESADOS - PRINCIPAL PROBLEMA) ===
 models/
-*.bin
-*.safetensors
-*.pt
-*.pth
-*.ckpt
-*.h5
-*.pkl
-*.joblib
 
 # === GIT ===
 .git/
 .gitignore
 .github/
 
-# === PYTHON ===
+# === PYTHON CACHE ===
 __pycache__/
 *.pyc
 *.pyo
-*.pyd
-.Python
-*.so
 .pytest_cache/
-.coverage
-htmlcov/
-.tox/
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
 
-# === AMBIENTES VIRTUAIS ===
+# === AMBIENTE ===
 .env
 .venv
-env/
 venv/
-ENV/
-env.bak/
-venv.bak/
-.conda/
 
-# === JUPYTER/NOTEBOOKS ===
-.ipynb_checkpoints/
-*.ipynb
+# === DESENVOLVIMENTO ===
+.vscode/
+*.md
+README*
+tests/
 
 # === DATASETS/DATA ===
 data/
