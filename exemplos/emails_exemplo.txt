@@ -1,0 +1,52 @@
+EMAILS DE EXEMPLO PARA TESTE
+
+=== EMAIL PRODUTIVO 1 ===
+Assunto: Problema no sistema de login
+
+Prezados,
+
+Estou enfrentando dificuldades para acessar o sistema desde ontem. 
+Quando tento fazer login, aparece a mensagem "Erro 500 - Servidor Indisponível".
+Preciso urgentemente acessar os relatórios para a reunião desta tarde.
+Podem verificar o que está acontecendo?
+
+Aguardo retorno.
+
+João Silva
+
+=== EMAIL PRODUTIVO 2 ===
+Assunto: Solicitação de status do processo #12345
+
+Olá,
+
+Gostaria de saber o andamento do processo #12345 que foi aberto na semana passada.
+O prazo está se aproximando e preciso de uma atualização sobre o status atual.
+Há alguma documentação adicional necessária da minha parte?
+
+Obrigada.
+
+Maria Santos
+
+=== EMAIL IMPRODUTIVO 1 ===
+Assunto: Feliz Aniversário!
+
+Oi pessoal!
+
+Só queria desejar um feliz aniversário para o Pedro!
+Que este novo ano de vida seja repleto de alegrias e conquistas.
+Parabéns! 🎉
+
+Abraços,
+Ana Costa
+
+=== EMAIL IMPRODUTIVO 2 ===
+Assunto: Obrigado pela ajuda
+
+Pessoal,
+
+Muito obrigado pela ajuda com o projeto ontem.
+Vocês são demais! Foi uma reunião muito produtiva.
+Que tenham um ótimo fim de semana!
+
+Valeu!
+Carlos Oliveira
