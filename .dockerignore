@@ -2,9 +2,6 @@
 # .dockerignore - SIMPLIFICADO
 # ====================
 
-# === MODELOS (PESADOS - PRINCIPAL PROBLEMA) ===
-models/
-
 # === GIT ===
 .git/
 .gitignore
