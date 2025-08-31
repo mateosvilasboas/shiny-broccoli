@@ -1,9 +1,28 @@
+version: '3.8'
+
 services:
-  app:
+  app-dev:
     build: .
     ports:
       - "8000:8000"
     volumes:
-      - ./models:/app/models  # Volume para modelos persistentes
+      - .:/app
+      - ./models:/app/models
     env_file:
       - .env
+    environment:
+      - ENVIRONMENT=development
+    command: uvicorn app.app:app --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped
+
+  app-prod:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+    env_file:
+      - .env
+    environment:
+      - ENVIRONMENT=production
+    restart: unless-stopped

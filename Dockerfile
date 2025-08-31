@@ -1,22 +1,20 @@
 FROM python:3.12.3-slim
+
+ARG ENVIRONMENT=production
+
 ENV POETRY_VIRTUALENVS_CREATE=false
 
 WORKDIR /app
 
-# Instalar Poetry
 RUN pip install poetry
 
-# Copiar arquivos de dependências primeiro (para cache)
 COPY pyproject.toml poetry.lock ./
 
-# Instalar dependências
 RUN poetry config installer.max-workers 10
 RUN poetry install --no-interaction --no-ansi
 
-# Copiar código da aplicação (models/ está no .dockerignore)
 COPY . .
 
-# Configurações de otimização para produção
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV HF_HOME=/tmp/hf_cache
