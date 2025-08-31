@@ -16,10 +16,9 @@ from transformers import (
     Trainer
 )
 from datasets import Dataset
-from trainment.data import generate_dataset
-from app.settings import settings
+from trainment.data import generate_dataset, DATA_FOLDER
 
-DATAFILE_PATH = os.path.join(settings.DATA_FOLDER, "email_dataset.csv")
+DATAFILE_PATH = os.path.join(DATA_FOLDER, "email_dataset.csv")
 
 
 class EmailClassifierTrainer:
@@ -40,7 +39,7 @@ class EmailClassifierTrainer:
         self._evaluate_on_test()
 
     def _load_and_prepare_data(self, csv_file:str=DATAFILE_PATH) -> None:
-        dataframe = pd.read_csv(csv_file, sep=';')  # Usar separador de ponto e vírgula
+        dataframe = pd.read_csv(csv_file, sep=';')
         texts = dataframe['text'].to_list()
         labels = dataframe['label'].to_list()
 

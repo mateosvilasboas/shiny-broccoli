@@ -27,6 +27,6 @@ primary_region = 'gru'
   destination = "/app/models"
 
 [[vm]]
-  memory = '1024mb'
+  memory = '1536mb'
   cpu_kind = 'shared'
-  cpus = 1
+  cpus = 2

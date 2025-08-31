@@ -78,10 +78,6 @@ Dockerfile*
 docker-compose*.yml
 .dockerignore
 
-# === ALEMBIC (se não usar migrations no container) ===
-alembic/
-alembic.ini
-
 # === EXEMPLOS/SAMPLES ===
 exemplos/
 examples/

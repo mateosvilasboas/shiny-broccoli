@@ -92,6 +92,9 @@ Documentação disponível em `http://localhost:8000/docs`
 ### Treinamento
 
 ```bash
+# Para gerar os dados
+poetry run python -m trainment.data # dados serão salvos em trainment/assets/
+
 # Treinar novo modelo
 poetry run python -m trainment.trainer
 ```

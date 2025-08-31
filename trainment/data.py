@@ -1,17 +1,17 @@
 import random
 import os
-from typing import List, Dict
 import pandas as pd
+from typing import List, Dict
+from app.settings import settings
 
-# ============= VOCATIVOS =============
+DATA_FOLDER = "trainment/assets/"
+
 def get_vocativos():
-    """Retorna lista de vocativos para emails"""
     nomes = ["João", "Maria", "Pedro", "Ana", "Carlos", "Lucia", "Paulo", "Fernanda", "Ricardo", "Juliana"]
     cargos = ["Dr.", "Dra.", "Sr.", "Sra.", "Prof.", "Profa."]
     
     vocativos = []
     
-    # Vocativos formais
     for nome in nomes:
         vocativos.extend([
             f"Prezado {nome}",
@@ -22,12 +22,10 @@ def get_vocativos():
             f"Estimada {nome}",
         ])
     
-    # Vocativos com cargo
     for cargo in cargos:
         for nome in nomes:
             vocativos.append(f"Prezado {cargo} {nome}")
     
-    # Vocativos casuais
     for nome in nomes:
         vocativos.extend([
             f"Olá, {nome}",
@@ -37,7 +35,6 @@ def get_vocativos():
             f"E aí, {nome}",
         ])
     
-    # Vocativos genéricos
     vocativos.extend([
         "Prezados",
         "Caros colegas",
@@ -50,15 +47,13 @@ def get_vocativos():
     
     return vocativos
 
-# ============= ASSINATURAS =============
+
 def get_assinaturas():
-    """Retorna lista de assinaturas para emails"""
     nomes = ["João Silva", "Maria Santos", "Pedro Oliveira", "Ana Costa", "Carlos Almeida", 
              "Lucia Ferreira", "Paulo Rodrigues", "Fernanda Lima", "Ricardo Souza", "Juliana Martins"]
     
     assinaturas = []
     
-    # Assinaturas formais
     for nome in nomes:
         assinaturas.extend([
             f"Atenciosamente,\n{nome}",
@@ -67,7 +62,6 @@ def get_assinaturas():
             f"Saudações,\n{nome}",
         ])
     
-    # Assinaturas casuais
     for nome in nomes:
         assinaturas.extend([
             f"Abraços,\n{nome}",
@@ -77,21 +71,17 @@ def get_assinaturas():
             f"Grande abraço,\n{nome}",
         ])
     
-    # Assinaturas com cargo
     cargos = ["Gerente de TI", "Analista de Sistemas", "Desenvolvedor", "Coordenador", 
               "Diretor", "Supervisor", "Especialista", "Consultor"]
     
-    for nome in nomes[:5]:  # Apenas alguns nomes
-        for cargo in cargos[:4]:  # Apenas alguns cargos
+    for nome in nomes[:5]:
+        for cargo in cargos[:4]:
             assinaturas.append(f"Atenciosamente,\n{nome}\n{cargo}")
     
     return assinaturas
 
-# ============= EMAILS PRODUTIVOS =============
 def get_productive_email_templates():
-    """Templates para emails produtivos completos"""
     return {
-        # Solicitações urgentes
         "urgent_requests": [
             "Preciso de sua ajuda urgente com {problema} no {sistema}. O problema está afetando {impacto} e precisa ser resolvido até {prazo}.",
             "Situação crítica: {sistema} apresentou {problema}. Por favor, priorize esta demanda pois está impactando {impacto}.",
@@ -100,7 +90,6 @@ def get_productive_email_templates():
             "Preciso de autorização imediata para {acao} devido a {problema} em {sistema}.",
         ],
         
-        # Consultas empresariais
         "business_queries": [
             "Gostaria de solicitar informações sobre {assunto} para {finalidade}. Preciso dos dados até {prazo}.",
             "Poderia me fornecer o status atual do {projeto}? Preciso atualizar {stakeholder}.",
@@ -109,7 +98,6 @@ def get_productive_email_templates():
             "Como devo proceder com {questao} considerando {restricao}?",
         ],
         
-        # Reportes técnicos
         "technical_reports": [
             "Identificamos {problema} no {sistema} durante {periodo}. Impacto: {impacto}. Ação necessária: {acao}.",
             "Relatório de incidente: {evento} ocorrido em {data} causando {consequencia}. Status: {status}.",
@@ -118,7 +106,6 @@ def get_productive_email_templates():
             "Update técnico: {sistema} apresenta {comportamento}. Necessário {intervencao}.",
         ],
         
-        # Pedidos de informação
         "info_requests": [
             "Solicito informações sobre {assunto} para {justificativa}. Prazo: {data}.",
             "Preciso dos seguintes dados: {dados} relacionados a {contexto}.",
@@ -127,7 +114,6 @@ def get_productive_email_templates():
             "Preciso de confirmação sobre {informacao} para {acao}.",
         ],
         
-        # Propostas comerciais
         "commercial_proposals": [
             "Proposta comercial para {servico}: {descricao}. Valor: {valor}. Prazo: {prazo}.",
             "Orçamento solicitado para {projeto} incluindo {escopo}. Aguardo retorno.",
@@ -136,7 +122,6 @@ def get_productive_email_templates():
             "Proposta de parceria para {objetivo} com benefícios mútuos.",
         ],
         
-        # Escalações
         "escalations": [
             "Escalação necessária: {problema} não foi resolvido após {tempo}. Impacto: {consequencia}.",
             "Solicito intervenção da gerência para {situacao} que está bloqueando {atividade}.",
@@ -146,11 +131,8 @@ def get_productive_email_templates():
         ],
     }
 
-# ============= EMAILS NÃO PRODUTIVOS =============
 def get_unproductive_email_templates():
-    """Templates para emails não produtivos completos"""
     return {
-        # Felicitações
         "congratulations": [
             "Parabéns pelo {conquista}! Sua dedicação e {qualidade} são inspiradoras.",
             "Ficamos muito felizes com seu {sucesso}! Merecido reconhecimento!",
@@ -159,7 +141,6 @@ def get_unproductive_email_templates():
             "Parabéns pelo {marco}! Sua {caracteristica} fez toda a diferença.",
         ],
         
-        # Agradecimentos
         "gratitude": [
             "Muito obrigado pela {ajuda} com {situacao}. Sua {qualidade} foi fundamental.",
             "Agradeço imensamente por {acao}. Fez toda a diferença para {resultado}.",
@@ -168,7 +149,6 @@ def get_unproductive_email_templates():
             "Agradeço pela {colaboracao} em {contexto}. Seu apoio foi {importancia}.",
         ],
         
-        # Newsletters e comunicados
         "newsletters": [
             "Newsletter {mes}: Confira as {novidades} da empresa e {atualizacoes}.",
             "Comunicado {numero}: {informacao} será implementado a partir de {data}.",
@@ -177,7 +157,6 @@ def get_unproductive_email_templates():
             "Informativo: Nova {politica} entra em vigor em {periodo}.",
         ],
         
-        # Aniversários
         "birthdays": [
             "Feliz aniversário, {nome}! Desejamos um ano repleto de {desejos}!",
             "Parabéns pelos seus {idade} anos! Que seja um ano de {aspiracoes}!",
@@ -186,7 +165,6 @@ def get_unproductive_email_templates():
             "Aniversário especial merece {celebracao}! Felicidades!",
         ],
         
-        # Conversas casuais
         "casual_chat": [
             "Como foram suas {periodo}? Espero que tenha {experiencia}!",
             "Lembrei de {memoria} e resolvi te contar sobre {assunto}.",
@@ -195,7 +173,6 @@ def get_unproductive_email_templates():
             "Estava pensando em {topico} e lembrei de você.",
         ],
         
-        # Anúncios corporativos
         "corporate_announcements": [
             "Temos o prazer de anunciar {novidade} que trará {beneficio} para todos.",
             "É com alegria que comunicamos {evento} que acontecerá em {data}.",
@@ -205,11 +182,8 @@ def get_unproductive_email_templates():
         ],
     }
 
-# ============= DADOS PARA PREENCHIMENTO =============
 def get_replacement_data():
-    """Dados para substituir placeholders nos templates"""
     return {
-        # Para emails produtivos
         "problemas": ["falha crítica", "erro 500", "timeout", "memory leak", "crash", "indisponibilidade", "lentidão", "bug crítico"],
         "sistemas": ["sistema de pagamento", "API principal", "banco de dados", "servidor de aplicação", "microserviço", "plataforma", "dashboard"],
         "ambientes": ["produção", "homologação", "staging", "desenvolvimento"],
@@ -219,7 +193,6 @@ def get_replacement_data():
         "consequencias": ["perda de receita", "insatisfação do cliente", "violação do SLA", "impacto na imagem", "multa contratual"],
         "acoes": ["restart do serviço", "rollback", "patch emergency", "escalação", "investigação", "monitoramento"],
         
-        # Dados adicionais para emails produtivos
         "assuntos": ["relatório mensal", "política de segurança", "processo de deploy", "configuração de rede", "documentação técnica"],
         "finalidades": ["auditoria interna", "compliance", "relatório executivo", "análise de risco", "planejamento"],
         "projetos": ["migração cloud", "novo sistema", "atualização de segurança", "otimização de performance", "integração"],
@@ -231,7 +204,6 @@ def get_replacement_data():
         "restricoes": ["política da empresa", "limitação orçamentária", "prazo apertado", "recursos limitados"],
         "questoes": ["aprovação de orçamento", "liberação de acesso", "validação técnica", "autorização de deploy"],
         
-        # Para emails não produtivos  
         "conquistas": ["promoção", "certificação", "prêmio", "reconhecimento", "meta batida", "projeto concluído"],
         "sucessos": ["novo emprego", "formatura", "casamento", "nascimento", "aposentadoria", "conquista pessoal"],
         "qualidades": ["competência", "dedicação", "liderança", "criatividade", "persistência", "colaboração"],
@@ -240,7 +212,6 @@ def get_replacement_data():
         "cortesias": ["paciência", "gentileza", "atenção", "dedicação", "cuidado", "carinho"],
         "novidades": ["benefícios", "melhorias", "oportunidades", "eventos", "projetos", "iniciativas"],
         
-        # Dados adicionais para emails não produtivos
         "eventos": ["aniversário da empresa", "festa de fim de ano", "workshop", "palestra", "confraternização"],
         "ajudas": ["orientação", "apoio", "suporte", "conselho", "dica", "colaboração"],
         "realizacoes": ["conclusão do projeto", "certificação obtida", "meta alcançada", "prêmio recebido"],
@@ -255,7 +226,6 @@ def get_replacement_data():
         "dados": ["métricas de performance", "relatório de vendas", "análise de custos", "estatísticas de uso"],
         "justificativas": ["análise estratégica", "planejamento anual", "auditoria interna", "compliance regulatório"],
         
-        # Dados adicionais para placeholders específicos
         "tempos": ["3 horas", "24 horas", "2 dias", "uma semana", "muito tempo"],
         "nomes": ["João", "Maria", "Pedro", "Ana", "Carlos", "Lucia", "Paulo", "Fernanda"],
         "periodos": ["fim de semana", "feriado", "férias", "mês passado", "semana"],
@@ -276,7 +246,6 @@ def get_replacement_data():
         "mudancas": ["nova estrutura organizacional", "processo otimizado", "ferramenta atualizada"],
         "melhorias": ["maior produtividade", "melhor qualidade", "experiência aprimorada"],
         
-        # Dados técnicos adicionais
         "comportamentos": ["lentidão", "instabilidade", "falhas intermitentes", "timeout", "erro de conexão"],
         "intervencoes": ["restart", "investigação detalhada", "patch", "monitoramento", "escalação"],
         "resultados": ["melhoria significativa", "resolução completa", "otimização", "correção"],
@@ -297,16 +266,6 @@ def get_replacement_data():
     }
 
 def generate_complete_email(template_type: str, is_productive: bool) -> str:
-    """
-    Gera um email completo com vocativo, corpo e assinatura
-    
-    Args:
-        template_type: Tipo do template (urgent_requests, congratulations, etc.)
-        is_productive: Se é email produtivo ou não
-    
-    Returns:
-        str: Email completo formatado
-    """
     vocativo = random.choice(get_vocativos())
     assinatura = random.choice(get_assinaturas())
     
@@ -317,13 +276,10 @@ def generate_complete_email(template_type: str, is_productive: bool) -> str:
         templates = get_unproductive_email_templates()
         corpo_template = random.choice(templates[template_type])
     
-    # Preencher placeholders
     replacement_data = get_replacement_data()
     corpo = corpo_template
     
-    # Lista de todos os placeholders possíveis para substituir
     all_placeholders = {
-        # Placeholders do dicionário principal
         "{problema}": "problemas",
         "{sistema}": "sistemas", 
         "{ambiente}": "ambientes",
@@ -401,18 +357,15 @@ def generate_complete_email(template_type: str, is_productive: bool) -> str:
         "{issue}": "issues",
     }
     
-    # Substituir todos os placeholders encontrados
     for placeholder, data_key in all_placeholders.items():
         if placeholder in corpo and data_key in replacement_data:
             corpo = corpo.replace(placeholder, random.choice(replacement_data[data_key]))
     
-    # Montar email completo
     email_completo = f"{vocativo},\n\n{corpo}\n\n{assinatura}"
     
     return email_completo
 
 def get_productive_templates():
-    """Mantém compatibilidade com versão anterior - versão simplificada"""
     templates = get_productive_email_templates()
     simple_templates = []
     
@@ -422,7 +375,6 @@ def get_productive_templates():
     return simple_templates
 
 def get_unproductive_templates():
-    """Mantém compatibilidade com versão anterior - versão simplificada"""
     templates = get_unproductive_email_templates()
     simple_templates = []
     
@@ -434,20 +386,16 @@ def get_unproductive_templates():
 
 def save_dataset_to_csv(
         dataset: List[dict], 
-        filename: str = "./app/assets/email_dataset.csv") -> None:
-    """Salva dataset em CSV para usar no treinamento"""
+        filename: str = DATA_FOLDER + "/email_dataset.csv") -> None:
     
-    # Criar diretório apenas se o filename tiver um diretório
     if os.path.dirname(filename):
         os.makedirs(os.path.dirname(filename), exist_ok=True)
     
     df = pd.DataFrame(dataset)
-    # Usar separador de ponto e vírgula para evitar problemas com vírgulas no texto
-    df.to_csv(filename, index=False, sep=';', quoting=1)  # quoting=1 adiciona aspas quando necessário
+    df.to_csv(filename, index=False, sep=';', quoting=1)
 
 
 def generate_single_productive_email() -> str:
-    """Gera um único email produtivo completo para teste"""
     categories = ["urgent_requests", "business_queries", "technical_reports", 
                   "info_requests", "commercial_proposals", "escalations"]
     category = random.choice(categories)
@@ -455,7 +403,6 @@ def generate_single_productive_email() -> str:
 
 
 def generate_single_unproductive_email() -> str:
-    """Gera um único email não produtivo completo para teste"""
     categories = ["congratulations", "gratitude", "newsletters", 
                   "birthdays", "casual_chat", "corporate_announcements"]
     category = random.choice(categories)
@@ -474,7 +421,6 @@ def generate_dataset(num_samples_per_class: int = 1000) -> List[dict]:
     """
     dataset = []
     
-    # Categorias de emails produtivos
     productive_categories = [
         "urgent_requests",
         "business_queries", 
@@ -484,7 +430,6 @@ def generate_dataset(num_samples_per_class: int = 1000) -> List[dict]:
         "escalations"
     ]
     
-    # Categorias de emails não produtivos
     unproductive_categories = [
         "congratulations",
         "gratitude",
@@ -494,45 +439,38 @@ def generate_dataset(num_samples_per_class: int = 1000) -> List[dict]:
         "corporate_announcements"
     ]
     
-    # Gerar emails produtivos
     emails_per_category = num_samples_per_class // len(productive_categories)
     remaining_emails = num_samples_per_class % len(productive_categories)
     
     for i, category in enumerate(productive_categories):
-        # Distribuir emails restantes nas primeiras categorias
         num_emails = emails_per_category + (1 if i < remaining_emails else 0)
         
         for _ in range(num_emails):
             email_text = generate_complete_email(category, is_productive=True)
             dataset.append({
                 "text": email_text,
-                "label": 1  # produtivo
+                "label": 1
             })
     
-    # Gerar emails não produtivos
     emails_per_category = num_samples_per_class // len(unproductive_categories)
     remaining_emails = num_samples_per_class % len(unproductive_categories)
     
     for i, category in enumerate(unproductive_categories):
-        # Distribuir emails restantes nas primeiras categorias
         num_emails = emails_per_category + (1 if i < remaining_emails else 0)
         
         for _ in range(num_emails):
             email_text = generate_complete_email(category, is_productive=False)
             dataset.append({
                 "text": email_text,
-                "label": 0  # não produtivo
+                "label": 0
             })
     
-    # Embaralhar dataset
     random.shuffle(dataset)
     
     return dataset
 
 
-# Exemplo de uso:
 if __name__ == "__main__":   
-    # Testar geração de emails individuais
     print("📧 Exemplo de Email Produtivo:")
     print("=" * 50)
     print(generate_single_productive_email())
@@ -542,19 +480,16 @@ if __name__ == "__main__":
     print("=" * 50)
     print(generate_single_unproductive_email())
     print("\n" + "=" * 50)
-    
-    # Gerar dataset completo
+
     print("\n🔄 Gerando dataset completo...")
-    dataset = generate_dataset(num_samples_per_class=500)  # Menor para teste
-    
-    # Salvar em CSV
+    dataset = generate_dataset(num_samples_per_class=500)
+
     save_dataset_to_csv(dataset)
     print(f"✅ Dataset salvo em email_dataset.csv")
     print(f"📊 Total de exemplos: {len(dataset)}")
     print(f"📈 Produtivos: {sum(1 for x in dataset if x['label'] == 1)}")
     print(f"📉 Não produtivos: {sum(1 for x in dataset if x['label'] == 0)}")
     
-    # Mostrar alguns exemplos
     print(f"\n📝 Primeiros 3 emails do dataset:")
     for i, email in enumerate(dataset[:3]):
         label = "PRODUTIVO" if email['label'] == 1 else "NÃO PRODUTIVO"
