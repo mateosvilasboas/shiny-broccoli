@@ -26,11 +26,21 @@ Aplicação que classifica emails como produtivos ou não-produtivos e gera suge
 
 ### Docker Compose (Recomendado)
 
-**Para Desenvolvimento** (com hot reload):
+### Desenvolvimento Local
+
+**Para Desenvolvimento local** (com hot reload):
 ```bash
+# Instalar dependências (CPU-only)
+poetry install
+
+# Ou instalar com suporte GPU (opcional)
+poetry install --with gpu
+
+# Treinar modelo (primeira execução)
+poetry run python -m trainment.trainer
+
 # Configure as variáveis de ambiente
 cp .env.example .env
-# Edite o .env com suas API keys
 
 # Execute em modo desenvolvimento
 docker compose up -d app-dev
@@ -56,19 +66,6 @@ docker compose down
 docker compose build
 ```
 
-### Desenvolvimento Local
-
-```bash
-# Instalar dependências
-poetry install
-
-# Treinar modelo (primeira execução)
-poetry run python -m trainment.trainer
-
-# Executar API
-poetry run uvicorn app.app:app --reload --host 0.0.0.0 --port 8000
-```
-
 ## Configuração
 
 Variáveis de ambiente necessárias:
@@ -77,7 +74,7 @@ Variáveis de ambiente necessárias:
 # .env
 HUGGING_FACE_TOKEN=your_hf_token_here
 GEMINI_API_KEY=your_gemini_api_key_here
-DATA_FOLDER=./app/assets/
+DATA_FOLDER=./app/assets/ # onde os dados de treinamento serão salvos
 ```
 
 ## Sistema de Classificação

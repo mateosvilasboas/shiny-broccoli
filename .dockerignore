@@ -92,7 +92,10 @@ backup/
 *.bak
 *.backup
 
+# === TREINAMENTO ===
+trainment/
+app/assets/
+
 # === ESPECÍFICOS DO PROJETO ===
 # Uncomment se necessário:
-# trainment/  # Se treinar fora do container
 # static/     # Se servir via CDN

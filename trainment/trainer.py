@@ -40,7 +40,7 @@ class EmailClassifierTrainer:
         self._evaluate_on_test()
 
     def _load_and_prepare_data(self, csv_file:str=DATAFILE_PATH) -> None:
-        dataframe = pd.read_csv(csv_file)
+        dataframe = pd.read_csv(csv_file, sep=';')  # Usar separador de ponto e vírgula
         texts = dataframe['text'].to_list()
         labels = dataframe['label'].to_list()
 
