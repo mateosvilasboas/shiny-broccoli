@@ -5,6 +5,8 @@ from transformers import (
     pipeline,
     Pipeline
 )
+from trainment.preprocessing import Preprocessor
+from app.settings import PREPROCESSING_MODE
 
 class EmailClassifier:
     def __init__(self, model_path: str = "models/email_classifier"):
@@ -34,10 +36,14 @@ class EmailClassifier:
                 tokenizer=self._tokenizer
             )
     
-    @property
-    def pipe(self) -> Pipeline:
-        return self._pipe
-    
     def classify_text(self, text: str) -> List[dict[str, Any]]:
-        return self.pipe(text)
+        preprocessor = Preprocessor(text=text)
+        preprocessed_text = preprocessor.preprocess(
+            mode=PREPROCESSING_MODE,
+            normalize=True,
+            remove_special_chars=True,
+            remove_stopwords=True
+        )
+
+        return self._pipe(preprocessed_text)
     

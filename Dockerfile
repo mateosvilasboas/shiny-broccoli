@@ -12,6 +12,10 @@ COPY pyproject.toml poetry.lock ./
 
 RUN poetry config installer.max-workers 10
 RUN poetry install --no-interaction --no-ansi
+# Instalar modelo spaCy para português
+RUN poetry run python -m spacy download pt_core_news_sm
+# Baixar recursos NLTK
+RUN poetry run python -c "import nltk; nltk.download('stopwords'); nltk.download('rslp'); nltk.download('punkt')"
 
 COPY . .
 

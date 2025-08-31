@@ -17,6 +17,8 @@ from transformers import (
 )
 from datasets import Dataset
 from trainment.data import generate_dataset, DATA_FOLDER
+from trainment.preprocessing import Preprocessor
+from app.settings import PREPROCESSING_MODE
 
 DATAFILE_PATH = os.path.join(DATA_FOLDER, "email_dataset.csv")
 
@@ -95,8 +97,19 @@ class EmailClassifierTrainer:
     
     def _tokenize_data(self) -> None:
         def tokenize(examples: Dict) -> Dict:
+            preprocessed_texts = []
+            for text in examples["text"]:
+                preprocessor = Preprocessor(text)
+                preprocessed_text = preprocessor.preprocess(
+                    mode=PREPROCESSING_MODE,
+                    normalize=True,
+                    remove_special_chars=True,
+                    remove_stopwords=True
+                )
+                preprocessed_texts.append(preprocessed_text)
+
             return self._tokenizer(
-                examples["text"],
+                preprocessed_texts,
                 padding="max_length",
                 truncation=True,
                 max_length=512,

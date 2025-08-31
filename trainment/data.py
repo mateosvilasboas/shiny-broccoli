@@ -129,6 +129,14 @@ def get_productive_email_templates():
             "Problema recorrente {descricao} precisa de atenção da liderança.",
             "Escalação de conflito: {situacao} está impedindo {resultado}.",
         ],
+        
+        "noisy_productive": [
+            "Espero que estejam todos bem! Preciso urgentemente de {recurso} para resolver {problema} que está impactando {impacto}. Aproveito para parabenizar a equipe pelo excelente trabalho!",
+            "Oi pessoal, como estão? Por favor, me ajudem com {questao} pois preciso finalizar {projeto} até {prazo}. Ah, e parabéns pelo aniversário da empresa!",
+            "Bom dia! Estava pensando no nosso último {evento} e lembrei que preciso solicitar {documento} para {justificativa}. Foi muito bom te ver!",
+            "Oi {nome}! Que alegria saber do seu {sucesso}! Aproveitando, poderia me enviar o status do {projeto}? Preciso atualizar {stakeholder} hoje.",
+            "Pessoal, obrigado pela {cortesia} durante {evento}. Agora preciso escalação para {problema} que não foi resolvido e está causando {consequencia}.",
+        ],
     }
 
 def get_unproductive_email_templates():
@@ -179,6 +187,14 @@ def get_unproductive_email_templates():
             "Anúncio importante: {mudanca} será implementada para {melhoria}.",
             "Compartilhamos com orgulho {conquista} da nossa equipe.",
             "Comunicamos {informacao} que entrará em vigor a partir de {periodo}.",
+        ],
+        
+        "noisy_unproductive": [
+            "Urgente! Parabéns pelo {marco}! Sua {caracteristica} é inspiradora. Aproveito para avisar sobre {evento} que acontecerá em {data}. Muito importante comparecer!",
+            "Pessoal, obrigado pela {colaboracao} no {contexto}. Foi {importancia}! Ah, e não esqueçam do {evento} amanhã. Por favor confirmem presença.",
+            "Oi galera! Newsletter {mes}: Confira {novidades}! Lembrando que precisamos de feedback sobre {assunto} até {prazo}. Abraços!",
+            "Feliz aniversário {nome}! Que alegria! Aproveitando, comunicamos que {mudanca} será implementada para {melhoria}. Detalhes em anexo.",
+            "Bom dia! Que {sentimento} te encontrar! Como tem passado? Informo que {informacao} entrará em vigor em {periodo}. Qualquer dúvida, me procurem.",
         ],
     }
 
@@ -397,14 +413,14 @@ def save_dataset_to_csv(
 
 def generate_single_productive_email() -> str:
     categories = ["urgent_requests", "business_queries", "technical_reports", 
-                  "info_requests", "commercial_proposals", "escalations"]
+                  "info_requests", "commercial_proposals", "escalations", "noisy_productive"]
     category = random.choice(categories)
     return generate_complete_email(category, is_productive=True)
 
 
 def generate_single_unproductive_email() -> str:
     categories = ["congratulations", "gratitude", "newsletters", 
-                  "birthdays", "casual_chat", "corporate_announcements"]
+                  "birthdays", "casual_chat", "corporate_announcements", "noisy_unproductive"]
     category = random.choice(categories)
     return generate_complete_email(category, is_productive=False)
 
@@ -427,7 +443,8 @@ def generate_dataset(num_samples_per_class: int = 1000) -> List[dict]:
         "technical_reports",
         "info_requests",
         "commercial_proposals",
-        "escalations"
+        "escalations",
+        "noisy_productive"
     ]
     
     unproductive_categories = [
@@ -436,7 +453,8 @@ def generate_dataset(num_samples_per_class: int = 1000) -> List[dict]:
         "newsletters", 
         "birthdays",
         "casual_chat",
-        "corporate_announcements"
+        "corporate_announcements",
+        "noisy_unproductive"
     ]
     
     emails_per_category = num_samples_per_class // len(productive_categories)

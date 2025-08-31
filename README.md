@@ -24,11 +24,10 @@ Aplicação que classifica emails como produtivos ou não-produtivos e gera suge
 
 ## Como Executar
 
-### Docker Compose (Recomendado)
-
 ### Desenvolvimento Local
 
-**Para Desenvolvimento local** (com hot reload):
+**Instalação e Downloads Necessários**:
+
 ```bash
 # Instalar dependências (CPU-only)
 poetry install
@@ -36,9 +35,28 @@ poetry install
 # Ou instalar com suporte GPU (opcional)
 poetry install --with gpu
 
+# Instalar modelo spaCy para português
+poetry run python -m spacy download pt_core_news_sm
+
+# Baixar recursos NLTK
+poetry run python -c "import nltk; nltk.download('stopwords'); nltk.download('rslp'); nltk.download('punkt')"
+
+# Verificar instalação
+poetry run python -c "import spacy; nlp = spacy.load('pt_core_news_sm'); print('✅ spaCy OK')"
+poetry run python -c "from nltk.corpus import stopwords; print('✅ NLTK OK')"
+```
+
+**Primeiro treinamento do modelo**
+```bash
+# Para gerar os dados
+poetry run python -m trainment.data
+
 # Treinar modelo (primeira execução)
 poetry run python -m trainment.trainer
+```
 
+**Para Desenvolvimento Local** (com hot reload):
+```bash
 # Configure as variáveis de ambiente
 cp .env.example .env
 
@@ -75,7 +93,14 @@ Variáveis de ambiente necessárias:
 HUGGING_FACE_TOKEN=your_hf_token_here
 GEMINI_API_KEY=your_gemini_api_key_here
 DATA_FOLDER=./app/assets/ # onde os dados de treinamento serão salvos
+
+# Configurações de Pré-processamento (opcionais)
+# app/settings.py
+PREPROCESSING_MODE=lemmatize # ou "stem"
 ```
+
+**Configurações de Pré-processamento**:
+- `PREPROCESSING_MODE`: `"lemmatize"` (padrão) ou `"stem"`
 
 ## Sistema de Classificação
 
@@ -87,7 +112,14 @@ DATA_FOLDER=./app/assets/ # onde os dados de treinamento serão salvos
 
 Documentação disponível em `http://localhost:8000/docs`
 
-## Machine Learning
+### Pré-processamento de Texto
+
+O sistema utiliza técnicas clássicas de NLP:
+
+- **Normalização**: Lowercase, remoção de acentos, limpeza de caracteres especiais
+- **Remoção de Stop Words**: NLTK + stop words customizadas para emails corporativos
+- **Lemmatização**: spaCy com modelo português (pt_core_news_sm)
+- **Configurável**: Escolha entre stemming (NLTK) ou lemmatização (spaCy)
 
 ### Treinamento
 
@@ -101,10 +133,11 @@ poetry run python -m trainment.trainer
 
 ### Pipeline
 
-1. BERT classifica o email
-2. Gemini analisa contexto e classificação  
-3. Gera explicação e sugestão de resposta
-4. Aplica formatação markdown
+1. **Pré-processamento** - Normalização, remoção de stopwords, lemmatização
+2. **BERT** classifica o email processado
+3. **Gemini** analisa contexto e classificação  
+4. Gera explicação e sugestão de resposta
+5. Aplica formatação markdown
 
 ## Deploy
 
