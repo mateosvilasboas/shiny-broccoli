@@ -90,7 +90,6 @@ backup/
 
 # === TREINAMENTO ===
 trainment/
-app/assets/
 
 # === ESPECÍFICOS DO PROJETO ===
 # Uncomment se necessário:
