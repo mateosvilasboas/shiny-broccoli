@@ -88,9 +88,6 @@ backup/
 *.bak
 *.backup
 
-# === TREINAMENTO ===
-trainment/
-
 # === ESPECÍFICOS DO PROJETO ===
 # Uncomment se necessário:
 # static/     # Se servir via CDN

@@ -29,11 +29,9 @@ Aplicação que classifica emails como produtivos ou não-produtivos e gera suge
 **Instalação e Downloads Necessários**:
 
 ```bash
-# Instalar dependências (CPU-only)
+# É necessário ter o poetry instalado localmente, antes de prosseguir
+# Instalar dependências
 poetry install
-
-# Ou instalar com suporte GPU (opcional)
-poetry install --with gpu
 
 # Instalar modelo spaCy para português
 poetry run python -m spacy download pt_core_news_sm
@@ -68,6 +66,7 @@ docker compose up -d app-dev
 
 **Para Produção Local** (sem hot reload):
 ```bash
+# Comente app-dev e retire os comentários em app-prod em docker-compose.yml
 # Execute em modo produção
 docker compose up -d app-prod
 ```
@@ -149,6 +148,7 @@ docker compose up app-prod
 
 ### Fly.io
 ```bash
-# Deploy direto (sem hot reload)
+# Comente app-dev e retire os comentários em app-prod em docker-compose.yml
+# Logo após, deploy direto (sem hot reload)
 fly deploy
 ```
