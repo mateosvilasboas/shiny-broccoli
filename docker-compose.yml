@@ -13,14 +13,14 @@ services:
     command: uvicorn app.app:app --host 0.0.0.0 --port 8000 --reload
     restart: unless-stopped
 
-  app-prod:
-    build: .
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./models:/app/models
-    env_file:
-      - .env
-    environment:
-      - ENVIRONMENT=production
-    restart: unless-stopped
+  # app-prod:
+  #   build: .
+  #   ports:
+  #     - "8000:8000"
+  #   volumes:
+  #     - ./models:/app/models
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - ENVIRONMENT=production
+  #   restart: unless-stopped
