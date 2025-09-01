@@ -8,7 +8,7 @@ class AIResponder:
             genai.configure(api_key=settings.GEMINI_API_KEY)
             self._model = genai.GenerativeModel('gemini-1.5-flash')
         
-    def sugest_answer(self, classification: dict[str, str | float]) -> str:
+    def suggest_answer(self, classification: dict[str, str | float]) -> str:
         try:
             email_text = classification.get("text", "")
             label = classification.get("label", "")

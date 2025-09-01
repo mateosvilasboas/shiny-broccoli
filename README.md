@@ -138,6 +138,9 @@ poetry run python -m trainment.trainer
 4. Gera explicação e sugestão de resposta
 5. Aplica formatação markdown
 
+### Considerações importantes
+Durante testes da API, detectei uma possível vulnerabilidade do sistema à prompt injection. É um ponto importante a se considerar, mas no momento, carece de uma investigação mais profunda que está fora do escopo do projeto.
+
 ## Deploy
 
 ### Docker Compose

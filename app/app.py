@@ -52,7 +52,7 @@ async def suggestion(input: Input):
             "score": score
         }
         responder = AIResponder()
-        explanation = responder.sugest_answer(
+        explanation = responder.suggest_answer(
             classification=classified_text_dict)
 
         return {
