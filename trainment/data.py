@@ -426,15 +426,6 @@ def generate_single_unproductive_email() -> str:
 
 
 def generate_dataset(num_samples_per_class: int = 1000) -> List[dict]:
-    """
-    Gera dataset para treinamento com emails completos
-    
-    Args:
-        num_samples_per_class: Número de exemplos por classe (produtivo/não produtivo)
-    
-    Returns:
-        List[dict]: Dataset com 'text' e 'label' (1=produtivo, 0=não produtivo)
-    """
     dataset = []
     
     productive_categories = [

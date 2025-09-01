@@ -3,16 +3,12 @@ from transformers import (
     AutoTokenizer,
     AutoModelForSequenceClassification,
     pipeline,
-    Pipeline
 )
 from trainment.preprocessing import Preprocessor
 from app.settings import PREPROCESSING_MODE
 
 class EmailClassifier:
     def __init__(self, model_path: str = "models/email_classifier"):
-        """
-        Carrega o modelo treinado para classificação produtivo/não-produtivo
-        """
         try:
             self._tokenizer = AutoTokenizer.from_pretrained(model_path)
             self._model = AutoModelForSequenceClassification.from_pretrained(model_path)

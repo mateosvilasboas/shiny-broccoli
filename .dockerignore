@@ -89,5 +89,8 @@ backup/
 *.backup
 
 # === ESPECÍFICOS DO PROJETO ===
+# Incluir explicitamente pasta de treinamento (necessária para preprocessing)
+!trainment/
+
 # Uncomment se necessário:
 # static/     # Se servir via CDN

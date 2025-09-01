@@ -17,7 +17,6 @@ def nl2br(text):
     return text.replace('\n', '<br>\n')
 
 def convert_markdown(text):
-    """Converte markdown para HTML com melhor formatação"""
     if not text:
         return ""
     text = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', text)
